@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.studyeasy.hibernate.entity.Users;
 
-public class App {
+public class AppGetSession {
 
   public static void main(String[] args) {
 	  
@@ -22,10 +22,7 @@ public class App {
 		  // Start transaction
 		  session.beginTransaction();
 		  // Perform operation
-		  user = session.get(Users.class, 8);
-		  //Deleting a Record with user id 8
-		  session.delete(user);
-		  
+		  user = session.get(Users.class, 0);
 		  // Commit the transaction 
 		  session.getTransaction().commit();
 		  System.out.println(user);

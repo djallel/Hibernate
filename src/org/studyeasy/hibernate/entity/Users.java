@@ -3,6 +3,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -82,4 +83,20 @@ public class Users {
 				+ firstName + ", lastName=" + lastName + "]";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Users)) return false;
+		Users users = (Users) o;
+		return getUserId() == users.getUserId() &&
+				Objects.equals(getUsername(), users.getUsername()) &&
+				Objects.equals(getPassword(), users.getPassword()) &&
+				Objects.equals(getFirstName(), users.getFirstName()) &&
+				Objects.equals(getLastName(), users.getLastName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getUserId(), getUsername(), getPassword(), getFirstName(), getLastName());
+	}
 }

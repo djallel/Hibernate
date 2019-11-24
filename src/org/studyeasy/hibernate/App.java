@@ -8,34 +8,32 @@ import org.studyeasy.hibernate.entity.Users;
 public class App {
 
   public static void main(String[] args) {
-	  
+
 	  SessionFactory factory = new Configuration()
 			                   .configure("hibernate.cfg.xml")
 			                   .addAnnotatedClass(Users.class)
 			                   .buildSessionFactory();
-	  
+
 	  Session session = factory.getCurrentSession();
-	  
+
 	  try {
 		  // Create object of entity class type
-		  Users user = new Users();
+		  Users user = new Users("username",  "password",  "firstName",  "lastName") ;
 		  // Start transaction
 		  session.beginTransaction();
 		  // Perform operation
-		  user = session.get(Users.class, 8);
-		  //Deleting a Record with user id 8
-		  session.delete(user);
-		  
-		  // Commit the transaction 
+		  session.save(user);
+
+		  // Commit the transaction
 		  session.getTransaction().commit();
-		  System.out.println(user);
-		  
-		
+		  System.out.println("Row added!!!");
+
+
 	} finally {
 		session.close();
 		factory.close();
 	}
-	
+
 }
 }
 
